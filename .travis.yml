@@ -1,0 +1,17 @@
+sudo: true
+dist: trusty
+
+env:
+  global:
+    - secure: #TODO
+    - secure: #TODO
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+        - sh download-binaries.sh
+        - docker build -t nautes .
+        - docker images
+        - docker tag nautes $DOCKER_USERNAME/nautes
+        - docker push $DOCKER_USERNAME/nautes
